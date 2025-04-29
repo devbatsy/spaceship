@@ -1,0 +1,237 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+input , textarea{
+    border: none;
+    outline: none;
+    border-radius:10px;
+    padding:10px;
+    font-family: font2;
+}
+.no_display::-webkit-scrollbar
+{
+    width: 3px;
+    height: 80%;
+	background-color: transparent;
+}
+.no_display::-webkit-scrollbar-track
+{
+    background:transparent;
+}
+.no_display::-webkit-scrollbar-thumb
+{
+    width: 0px;
+	border-radius: 20px;
+    display:none;
+}
+.no_display::-webkit-scrollbar:hover ::-webkit-scrollbar-thumb{
+    width: 3px;
+}
+body{
+    position: relative;
+    overflow-x: hidden;
+}
+a{
+    text-decoration: none;
+    color: unset;
+}
+nav .navTxt{
+    opacity: .6;
+    transition: all linear .1s;
+    font-weight: 400;
+}
+nav .navTxt:hover{
+    opacity: 1;
+}
+nav i{
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    transition: all linear .1s;
+}
+nav i:hover{
+    color: #5242fc;
+}
+.p5_tab
+{
+    background: transparent;
+    transition: all linear .5s;
+}
+.p5_tab:hover
+{
+    background-color: #252422;
+}
+.p5_tab_div
+{
+    border-radius: 50%;
+    transition: all linear .5s;
+}
+.p5_tab:hover .p5_tab_div
+{
+    border-radius: 10px;
+}
+.p5_tab .p5_tab_i
+{
+    color: #fff;
+}
+.p5_tab:hover .p5_tab_i
+{
+    color: #242522;
+}
+.p3_tab i
+{
+    border: 5px solid transparent;
+    transition: all linear .3s;
+}
+.p3_tab:hover i{
+    border:5px solid #fff;
+}
+
+.p3_tab_i_animation
+{
+    animation: glow_out;
+    animation-iteration-count: infinite;
+    animation-duration: 5s;
+    animation-timing-function:ease-in .3s;
+}
+
+@keyframes glow_out
+{
+    0%
+    {
+        height:110%;
+        width:110%;
+        background:#5A66CC;
+    }
+    50%
+    {
+        height:120%;
+        width:120%;
+        background:#9B5DE5;
+    }
+    50%
+    {
+        height:130%;
+        width:130%;
+        background:#E84CFA;
+    }
+}
+
+.mobileMenu_logo span
+{
+    transition: all linear .3s;
+}
+@font-face {
+    font-family: font1;
+    src: url(../assets/Montserrat-VariableFont_wght.ttf);
+}
+.font1_custom
+{
+    letter-spacing: 2px;
+}
+@font-face
+{
+    font-family: font2;
+    src:url(../assets/Montserrat-VariableFont_wght.ttf)
+}
+.clickButton , .footer_a
+{
+    cursor: pointer;
+    background:transparent;
+    transition: all linear .3s;
+    position:relative;
+    isolation: isolate;
+    overflow: hidden;
+}
+.clickButton::after , .footer_a::after
+{
+    z-index: -1;
+    height:200px;
+    width:100%;
+    min-width:300px;
+    position:absolute;
+    content: "";
+    bottom:0px;
+    left:50%;
+    background:linear-gradient(135deg, #5A66CC 0%, #9B5DE5 100%);
+    border-radius: 50%;
+    transform:translateY(100%) translateX(-50%);
+    transition: transform linear .6s;
+}
+.clickButton:hover.clickButton::after , .footer_a:hover.footer_a::after
+{
+    bottom: 50%;
+    transform:translateX(-50%) translateY(50%);
+}
+.clickButton_p6
+{
+    cursor: pointer;
+    background:color-mix(in oklab, #ffffff 5%, transparent);;
+    transition: all linear .3s;
+}
+.clickButton_p6:hover{
+    background:linear-gradient(135deg, #5A66CC 0%, #9B5DE5 100%);
+}
+.clickButton_explore:hover{
+    background:linear-gradient(135deg, #5A66CC 0%, #9B5DE5 100%);
+}
+/* .footer_a
+{
+    transition: all linear .3s;
+} */
+.p6_custom_slider_tabs
+{
+    background-color: transparent;
+    transition: all linear .3s;
+}
+.p6_custom_slider_tabs:hover{
+    background-color: #252422;
+}
+
+.grad
+{
+    background:#5A66CC;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+.flip_entry_animation
+{
+    animation: flip_box;
+    animation-iteration-count: 1;
+    animation-duration: 1s;
+    animation-timing-function:ease-in-out;
+}
+
+@keyframes flip_box {
+    0%
+    {
+        transform: rotateX(90deg);
+    }
+
+    100%
+    {
+        transform: rotateX(0deg);
+    }
+}
+
+.mobileNav_entry
+{
+    animation: nav_entry;
+    animation-iteration-count: 1;
+    animation-duration: .4s;
+    animation-timing-function:linear;
+}
+
+@keyframes nav_entry {
+    0%
+    {
+        transform:translateY(20px);
+    }
+
+    100%
+    {
+        transform:translateY(0px);
+    }
+}
