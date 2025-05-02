@@ -78,7 +78,7 @@ __SYD.p1_subText = () =>{
         "div",
         {},
         [
-            __c("p" , {style:SYD_VAR.pag1SubText.get() + "text-shadow:0 0 2px #000;"},["Your All-in-One Destination for Crypto Marketing."])
+            __c("p" , {style:SYD_VAR.pag1SubText.get() + "text-shadow:0 0 2px #000;"},["The Ultimate Destination for All Your Crypto Marketing Needs."])
         ]
     )
 }

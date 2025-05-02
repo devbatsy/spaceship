@@ -142,7 +142,7 @@ __SYD.p2_text3 = () =>{
         [
             __c(
                 "p",
-                {},[`Spaceship Marketing is a premium marketing service, that offer the most productive solutions with effective results. Our extensive resources and connections, at the most competitive prices on the market, provide our clients with a variety of options for their budget to make their project a success..`]
+                {},[`Spaceship Marketing is a premium service offering high-impact solutions that deliver real results. With our vast network, powerful resources, and some of the most competitive rates in the industry, we give our clients flexible, budget-friendly options to ensure their project’s success.`]
             )
         ]
     )
