@@ -204,7 +204,7 @@ __SYD.p8_buttons = ({val = "" , link = "" , cls = "clickButton"}) =>{
                         };
                     
                         try {
-                            const response = await fetch('http://localhost:3000/send-message', {
+                            const response = await fetch('https://spaceship-email.fly.dev/send-message', {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json'
