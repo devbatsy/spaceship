@@ -90,9 +90,18 @@ __SYD.form_section = () =>{
     return __c(
         "div",
         {
-            style:`height:fit-content;width:${__p(["p8" , "breakVal"], false) ? "100%" : "60%"};padding:20px;display:flex;flex-direction:column;gap:30px;align-items:center;`
+            style:`height:fit-content;width:${__p(["p8" , "breakVal"], false) ? "100%" : "60%"};padding:20px;display:flex;flex-direction:column;gap:30px;align-items:center;overflow:hidden;`
         },
         [
+            __c(
+                "div",
+                {
+                    style:`height:fit-content;min-height:50px;width:100%;padding:15px;background:${__p(["form_section" , "typeMsg"],"err") === "err" ? " #fabcbc " : " #d9fcac "}  ;color:#000;display:flex;align-items:center;text-align:left;transition:all linear .3s;transform:translateY(${__p(["form_section" , "togMessage"],false) ? "0%" : "-200%"})`
+                },
+                [
+                    `${__p(["form_section" , "msgContent"],"")}`
+                ],{type:"send-mess-feedback"}
+            ),
             __c(
                 "p",
                 {
@@ -117,11 +126,12 @@ __SYD.form_section = () =>{
                             __c(
                                 "input",
                                 {
-                                    style:"height:45px;width:100%;background:#fff;",
+                                    style:"height:45px;width:100%;background:#fff;text-transform:capitalize;",
                                     type:"text",
                                     class:"name",
                                     placeholder:"Enter name"
-                                }
+                                },
+                                [],{type:"msg-name"}
                             ),
                             __c(
                                 "input",
@@ -130,16 +140,16 @@ __SYD.form_section = () =>{
                                     type:"email",
                                     class:"email",
                                     placeholder:"Enter email"
-                                }
+                                },[],{type:"msg-email"}
                             ),
                             __c(
                                 "input",
                                 {
-                                    style:"height:45px;width:100%;background:#fff;",
+                                    style:"height:45px;width:100%;background:#fff;text-transform:capitalize;",
                                     type:"text",
                                     class:"subject",
                                     placeholder:"Enter subject"
-                                }
+                                },[],{type:"msg-subject"}
                             ),
                         ]
                     ),
@@ -148,12 +158,27 @@ __SYD.form_section = () =>{
                         {
                             style:`height:150px;width:${__p(["p8" , "breakVal"], false) ? "100%" : "40%"};resize:none;`,
                             placeholder:"Message"
-                        }
+                        },[],{type:"msg-text"}
                     )
                 ]
             ),
             __SYD.p8_buttons({val:"send message"})
-        ]
+        ],
+        {
+            createState:{
+                stateName:"form_section",
+                state:{
+                    togMessage:false,
+                    msgContent:"",
+                    typeMsg:"err",
+                    updateState:({prop , val}) =>{
+                        const state = __g("form_section");
+                        state[`${prop}`] = val;
+                        __u("form_section" , {type:"a" , value:state});
+                    }
+                }
+            }
+        }
     )
 }
 
@@ -169,8 +194,64 @@ __SYD.p8_buttons = ({val = "" , link = "" , cls = "clickButton"}) =>{
         ],
         {
             events:{
-                onclick:e =>{
-                    location.href = link
+                onclick:async e =>{
+                    async function sendMessage() {
+                        const payload = {
+                            sender: `${__v["msg-email"].value}`, // Optional
+                            subject: `${__v["msg-subject"].value}`,
+                            message: `${__v["msg-text"].value}`,
+                            name: `${__v["msg-name"].value}`
+                        };
+                    
+                        try {
+                            const response = await fetch('http://localhost:3000/send-message', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(payload)
+                            });
+                    
+                            const result = await response.json();
+                            if (result.success) {
+                                const state = __g("form_section");
+                                state.togMessage = true;
+                                state.typeMsg = "success"
+                                state.msgContent = `✅ Email sent successfully 🫡`,
+                                __u("form_section" , {type:"a" , value:state});
+
+                                __v["send-mess-feedback"].scrollIntoView();
+
+                                console.log('✅ Email sent successfully:', result);
+                                // alert('Message sent successfully!');
+                            } else {
+                                const state = __g("form_section");
+                                state.togMessage = true;
+                                state.typeMsg = "err"
+                                state.msgContent = `❌ Failed to send email 🥲`,
+                                __u("form_section" , {type:"a" , value:state});
+
+                                __v["send-mess-feedback"].scrollIntoView();
+
+                                console.error('❌ Failed to send email:', result);
+                                // alert('Failed to send message.');
+                            }
+                        } catch (error) {
+                            console.error('🚨 Error sending request:', error);
+                            alert('An error occurred.');
+                        }
+                    }
+
+                    if(__v["msg-subject"].value.length > 0 && __v["msg-email"].value.length > 0 && __v["msg-name"].value.length > 0 && __v["msg-text"].value.length > 0) sendMessage();
+                    else{
+                        const state = __g("form_section");
+                        state.togMessage = true;
+                        state.typeMsg = "err"
+                        state.msgContent = "Please enter all feilds",
+                        __u("form_section" , {type:"a" , value:state});
+
+                        __v["send-mess-feedback"].scrollIntoView();
+                    }
                 }
             }
         }
@@ -234,7 +315,7 @@ __SYD.socials_section = () =>{
                         "a",
                         {
                             style:"display:flex;gap:20px;align-items:center;",
-                            href:""
+                            href:"mailto:spaceshipmarketingsagency@gmail.com"
                         },
                         [
                             __c("i" , {style:"height:30px;width:30px;font-size:30px;color:#fff;" , class:"fas fa-envelope"}),
